@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+
+.newsletter {
+padding: 80px 0;
+background: #f2f2f2;
+}
+
+.newsletter .content {
+max-width: 650px;
+margin: 0 auto;
+text-align: center;
+position: relative;
+z-index: 2; }
+.newsletter .content h2 {
+color: #243c4f;
+margin-bottom: 40px; }
+.newsletter .content .form-control {
+height: 50px;
+border-color: #ffffff;
+border-radius:0;
+}
+.newsletter .content.form-control:focus {
+box-shadow: none;
+border: 2px solid #243c4f;
+}
+.newsletter .content .btn {
+min-height: 50px; 
+border-radius:0;
+background: #243c4f;
+color: #fff;
+font-weight:600;
+}
+
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+.megamenu {
+  position: static;
+}
+
+.megamenu .dropdown-menu {
+  background: none;
+  border: none;
+  width: 100%;
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+
+code {
+  color: #745eb1;
+  background: #fff;
+  padding: 0.1rem 0.2rem;
+  border-radius: 0.2rem;
+}
+
+.text-uppercase {
+  letter-spacing: 0.08em;
+}
+
+
+    </style>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0"></script>
+
+</head>
+<body>
+  <div class="container">
+      <nav style="background-color: lightgrey;" class="navbar navbar-light justify-content-between">
+        <a class="navbar-brand">Navbar</a>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button style="background-color:grey;" class="btn my-2 my-sm-0" type="submit"><span style="color: white;">Search</span></button>
+        </form>
+      </nav>
+  </div>
+
+    <div class="container">
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'post-list' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'django-post-list' q='django'%}">Django</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'python-post-list' q='python'%}">Python</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'excel-post-list' q='excel'%}">Microsoft Excel</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'howto-post-list' q='howto'%}">How To</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact-page'%}">Contact Us</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search-post-list' %}">
+              {% if 'q' in request.GET %}
+              {% with q=request.GET.q %}
+              <input class="form-control mr-sm-2" name="q" type="search" value="{{q}}" aria-label="Search">
+              {% endwith %}
+              {% else %}
+              <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search in all categories" aria-label="Search">
+              {% endif %}
+              <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav> -->
+    </div>
+    
+    <!-- Page Content -->
+    <div class="container">
+    <br>
+      <div class="row row-cols-1 row-cols-md-2">
+        {% for post in posts %}
+        <div class="col mb-4">
+          <!-- Card -->
+          <div class="card">
+
+            <!--Card image-->
+            <div class="view overlay">
+              <a href="{% url 'post-detail' pk=post.id %}">
+
+              <img class="card-img-top" src="{{post.index_image}}"alt="Card image cap">
+
+                <!-- <div class="mask rgba-white-slight"></div> -->
+              </a>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+              <!--Title-->
+              <h4 class="card-title">{{post.title}}</h4>
+              <!--Text-->
+              <p class="card-text">{{post.short_description}}</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <button type="button" class="btn btn-primary btn-md">Read more</button>
+
+            </div>
+            <div class="card-footer text-muted">
+              Posted on January 8, 2017 by Admin
+            </div>
+          </div>
+          <!-- Card -->
+        </div>
+        {% endfor %}
+      </div>
+      <!-- /.container -->
+    <br>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          {% endif %}
+          {% for i in page_obj.paginator.page_range %}
+            
+            {% if 'q' in request.GET %}
+            {% with q=request.GET.q %}
+            <li class="page-item"><a class="page-link" href="?q={{q}}&page={{i}}">{{i}}</a></li>
+            {% endwith %}
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endif %}
+
+          {% endfor %}
+          <!-- <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+          <li class="page-item"><a class="page-link" href="?page=2">2</a></li> -->
+          {% if page_obj.has_next %}
+          {% if 'q' in request.GET %}
+          {% with q=request.GET.q %}
+          <li class="page-item"><a class="page-link" href="?q={{q}}&page={{ page_obj.next_page_number }}">Next</a></li>
+          {% endwith %}
+          {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+          {% endif %}
+          {% endif %}
+        </ul>
+      </nav>
+
+    </div>
+    <!-- /.container -->
+    <section class="newsletter">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="content">
+                      <form>
+                          <h2>SUBSCRIBE TO OUR NEWSLETTER</h2>
+                          <div class="input-group">
+                              <input type="email" class="form-control" placeholder="Enter your email">
+                              <span class="input-group-btn">
+                                  <button class="btn" type="submit">Subscribe Now</button>
+                              </span>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+      <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container text-center">
+          <small>Copyright &copy; codex.com</small>
+        </div>
+      </footer>
+</body>
+</html>
