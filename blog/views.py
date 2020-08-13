@@ -11,6 +11,18 @@ from .models import Post,ContactFormModel
 from .forms import ContactForm
 
 
+class IndexPostListView(ListView):
+    model = Post
+    template_name = 'blog/index.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        django_posts = Post.objects.filter(category__name='Django').order_by('-created_at')[:4]
+        excel_posts = Post.objects.filter(category__name='Microsoft Excel').order_by('-created_at')[:3]
+        context["django_posts"] = django_posts
+        context["excel_posts"] = excel_posts
+        return context
+
 class PostListView(ListView):
     model = Post
     queryset = Post.objects.all()
@@ -29,7 +41,7 @@ class SearchPostListView(ListView):
     model = Post
     queryset = Post.objects.all()
     context_object_name = 'posts'
-    paginate_by = 5
+    paginate_by = 3
     template_name = 'blog/search_post_list.html'
 
     def get_queryset(self):

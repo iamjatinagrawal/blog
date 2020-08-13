@@ -15,74 +15,9 @@
 
     <style type="text/css">
 
-.newsletter {
-padding: 80px 0;
-background: #f2f2f2;
+        body {
+  padding-top: 56px;
 }
-
-.newsletter .content {
-max-width: 650px;
-margin: 0 auto;
-text-align: center;
-position: relative;
-z-index: 2; }
-.newsletter .content h2 {
-color: #243c4f;
-margin-bottom: 40px; }
-.newsletter .content .form-control {
-height: 50px;
-border-color: #ffffff;
-border-radius:0;
-}
-.newsletter .content.form-control:focus {
-box-shadow: none;
-border: 2px solid #243c4f;
-}
-.newsletter .content .btn {
-min-height: 50px; 
-border-radius:0;
-background: #243c4f;
-color: #fff;
-font-weight:600;
-}
-
-/*
-*
-* ==========================================
-* CUSTOM UTIL CLASSES
-* ==========================================
-*
-*/
-
-.megamenu {
-  position: static;
-}
-
-.megamenu .dropdown-menu {
-  background: none;
-  border: none;
-  width: 100%;
-}
-
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
-
-code {
-  color: #745eb1;
-  background: #fff;
-  padding: 0.1rem 0.2rem;
-  border-radius: 0.2rem;
-}
-
-.text-uppercase {
-  letter-spacing: 0.08em;
-}
-
 
     </style>
 
@@ -90,53 +25,19 @@ code {
 
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
-    <a href="#" class="navbar-brand font-weight-bold d-block d-lg-none"></a>
-    <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
-            <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="navbarContent" class="collapse navbar-collapse">
-      <ul class="navbar-nav mx-auto">
-        <!-- Megamenu-->
-        <li class="nav-item dropdown megamenu">
-          <a id="megamneu" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link font-weight-bold text-uppercase">
-            Home</a>
-        </li>
-        <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Django</a></li>
-        <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Python</a></li>
-        <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Microsoft Excel</a></li>
-      </ul>
-    </div>
-  </nav>
-  <section class="newsletter">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="content">
-                    <form method="get" action="{% url 'search-post-list' %}">
-                        <div class="input-group">
-                            <input class="form-control" name="q" placeholder="Search in all categories">
-                            <span class="input-group-btn">
-                                <button class="btn" type="submit">Search</button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-    <div class="container">
-        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'post-list' %}">Home <span class="sr-only">(current)</span></a>
-              </li>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">Djangeek</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+<!--              <li class="nav-item active">-->
+<!--                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>-->
+<!--              </li>-->
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'django-post-list' q='django'%}">Django</a>
               </li>
@@ -152,8 +53,10 @@ code {
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'contact-page'%}">Contact Us</a>
               </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search-post-list' %}">
+        </ul>
+          <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                                  <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search-post-list' %}">
               {% if 'q' in request.GET %}
               {% with q=request.GET.q %}
               <input class="form-control mr-sm-2" name="q" type="search" value="{{q}}" aria-label="Search">
@@ -161,21 +64,21 @@ code {
               {% else %}
               <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search in all categories" aria-label="Search">
               {% endif %}
-              <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+              <button style="background-color:grey;" class="btn my-2 my-sm-0" type="submit"><span style="color: white;">Search</span></button>
             </form>
-          </div>
-        </nav> -->
+        </li>
+              </ul>
+      </div>
     </div>
-    <br>
-    
-    <!-- Page Content -->
-    <div class="container">
-    <div class="container">
+  </nav>
+
+  <!-- Page Content -->
+<div class="container">
 
         <!-- Page Heading -->
         <h4 class="my-4">Search results for: {{request.GET.q}}</h4>
         <br>
-  
+
         <!-- Project One -->
         {% for post in posts %}
         <div class="row">
@@ -193,7 +96,7 @@ code {
           </div>
         </div>
         <!-- /.row -->
-  
+
         <hr>
         {% endfor %}
       </div>
@@ -205,7 +108,7 @@ code {
           <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
           {% endif %}
           {% for i in page_obj.paginator.page_range %}
-            
+
             {% if 'q' in request.GET %}
             {% with q=request.GET.q %}
             <li class="page-item"><a class="page-link" href="?q={{q}}&page={{i}}">{{i}}</a></li>
@@ -230,30 +133,20 @@ code {
       </nav>
 
     </div>
+  <!-- /.container -->
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; iamjatinagrawal 2020</p>
+    </div>
     <!-- /.container -->
-    <section class="newsletter">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-12">
-                  <div class="content">
-                      <form>
-                          <h2>SUBSCRIBE TO OUR NEWSLETTER</h2>
-                          <div class="input-group">
-                              <input type="email" class="form-control" placeholder="Enter your email">
-                              <span class="input-group-btn">
-                                  <button class="btn" type="submit">Subscribe Now</button>
-                              </span>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-      <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-        <div class="container text-center">
-          <small>Copyright &copy; codex.com</small>
-        </div>
-      </footer>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

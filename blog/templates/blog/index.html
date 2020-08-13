@@ -92,7 +92,7 @@
 
     <!-- Content Row -->
     <div class="row">
-        {% for post in posts %}
+        {% for post in django_posts %}
       <div class="col-md-6 mb-5">
         <div class="card h-100">
                         <!--Card image-->
@@ -115,41 +115,70 @@
         </div>
       </div>
         {% endfor %}
+        {% for post in excel_posts %}
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+                        <!--Card image-->
+            <div class="view overlay">
+              <a href="{% url 'post-detail' pk=post.id %}">
+
+              <img class="card-img-top" src="{{post.index_image}}"alt="Card image cap">
+
+                <!-- <div class="mask rgba-white-slight"></div> -->
+              </a>
+            </div>
+          <div class="card-body">
+            <h2 class="card-title">{{post.title}}</h2>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+        {% for post in posts %}
+      <div class="col-md-12 mb-5">
+        <div class="card h-100">
+                        <!--Card image-->
+            <div class="view overlay">
+              <a href="{% url 'post-detail' pk=post.id %}">
+
+              <img class="card-img-top" src="{{post.index_image}}"alt="Card image cap">
+
+                <!-- <div class="mask rgba-white-slight"></div> -->
+              </a>
+            </div>
+          <div class="card-body">
+            <h2 class="card-title">{{post.title}}</h2>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+
+    </div>
+    <!-- /.row -->
+
+          <!-- creator detail -->
+    <div class="row align-items-center my-5">
+      <div class="col-lg-7">
+        <img class="img-fluid rounded mb-4 mb-lg-0" src="https://drive.google.com/uc?export=view&id=1pBOyPHTAXZUv4JIhOarnSzCqYKc9zLzu" alt="">
+      </div>
+      <!-- /.col-lg-8 -->
+      <div class="col-lg-5">
+        <h1 class="font-weight-light">/iamjatinagrawal</h1>
+      </div>
+      <!-- /.col-md-4 -->
     </div>
     <!-- /.row -->
 
 
   </div>
   <!-- /.container -->
-        <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          {% if page_obj.has_previous %}
-          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
-          {% endif %}
-          {% for i in page_obj.paginator.page_range %}
-
-            {% if 'q' in request.GET %}
-            {% with q=request.GET.q %}
-            <li class="page-item"><a class="page-link" href="?q={{q}}&page={{i}}">{{i}}</a></li>
-            {% endwith %}
-            {% else %}
-              <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-            {% endif %}
-
-          {% endfor %}
-          <!-- <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-          <li class="page-item"><a class="page-link" href="?page=2">2</a></li> -->
-          {% if page_obj.has_next %}
-          {% if 'q' in request.GET %}
-          {% with q=request.GET.q %}
-          <li class="page-item"><a class="page-link" href="?q={{q}}&page={{ page_obj.next_page_number }}">Next</a></li>
-          {% endwith %}
-          {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-          {% endif %}
-          {% endif %}
-        </ul>
-      </nav>
 
 
   <!-- Footer -->
@@ -159,6 +188,10 @@
     </div>
     <!-- /.container -->
   </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
