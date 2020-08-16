@@ -19,6 +19,36 @@
   padding-top: 56px;
 }
 
+.newsletter {
+padding: 80px 0;
+background: #f2f2f2;
+}
+
+.newsletter .content {
+max-width: 650px;
+margin: 0 auto;
+text-align: center;
+position: relative;
+z-index: 2; }
+.newsletter .content h2 {
+color: #243c4f;
+margin-bottom: 40px; }
+.newsletter .content .form-control {
+height: 50px;
+border-color: #ffffff;
+border-radius:0;
+}
+.newsletter .content.form-control:focus {
+box-shadow: none;
+border: 2px solid #243c4f;
+}
+.newsletter .content .btn {
+min-height: 50px;
+border-radius:0;
+background: #243c4f;
+color: #fff;
+font-weight:600;
+}
     </style>
 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0"></script>
@@ -62,7 +92,7 @@
               <input class="form-control mr-sm-2" name="q" type="search" value="{{q}}" aria-label="Search">
               {% endwith %}
               {% else %}
-              <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search in all categories" aria-label="Search">
+              <input class="form-control mr-sm-2" size="30" name="q" type="search" placeholder="Search in all categories" aria-label="Search">
               {% endif %}
               <button style="background-color:grey;" class="btn my-2 my-sm-0" type="submit"><span style="color: white;">Search</span></button>
             </form>
@@ -82,9 +112,9 @@
       </div>
       <!-- /.col-lg-8 -->
       <div class="col-lg-5">
-        <h1 class="font-weight-light">Business Name or Tagline</h1>
+        <h1 class="font-weight-light">Welcome to DjanGeek</h1>
         <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-        <a class="btn btn-primary" href="#">Call to Action!</a>
+<!--        <a class="btn btn-primary" href="#">Call to Action!</a>-->
       </div>
       <!-- /.col-md-4 -->
     </div>
@@ -107,15 +137,17 @@
           <div class="card-body">
 
             <h2 class="card-title">{{post.title}}</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+            <p class="card-text">{{post.short_description}}</p>
+              <a href="{% url 'post-detail' pk=post.id %}" class="btn btn-primary">Read More</a>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
-          </div>
+
+            <div class="card-footer text-muted">
+              Posted on {{post.created_at}} by {{created_by}}
+            </div>
         </div>
       </div>
         {% endfor %}
-        {% for post in excel_posts %}
+        {% for post in python_posts %}
       <div class="col-md-4 mb-5">
         <div class="card h-100">
                         <!--Card image-->
@@ -129,33 +161,13 @@
             </div>
           <div class="card-body">
             <h2 class="card-title">{{post.title}}</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+            <p class="card-text">{{post.short_description}}</p>
+              <a href="{% url 'post-detail' pk=post.id %}" class="btn btn-primary">Read More</a>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
-          </div>
-        </div>
-      </div>
-        {% endfor %}
-        {% for post in posts %}
-      <div class="col-md-12 mb-5">
-        <div class="card h-100">
-                        <!--Card image-->
-            <div class="view overlay">
-              <a href="{% url 'post-detail' pk=post.id %}">
 
-              <img class="card-img-top" src="{{post.index_image}}"alt="Card image cap">
-
-                <!-- <div class="mask rgba-white-slight"></div> -->
-              </a>
+            <div class="card-footer text-muted">
+              Posted on {{post.created_at}} by {{created_by}}
             </div>
-          <div class="card-body">
-            <h2 class="card-title">{{post.title}}</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
-          </div>
         </div>
       </div>
         {% endfor %}
@@ -164,22 +176,68 @@
     <!-- /.row -->
 
           <!-- creator detail -->
-    <div class="row align-items-center my-5">
-      <div class="col-lg-7">
-        <img class="img-fluid rounded mb-4 mb-lg-0" src="https://drive.google.com/uc?export=view&id=1pBOyPHTAXZUv4JIhOarnSzCqYKc9zLzu" alt="">
-      </div>
-      <!-- /.col-lg-8 -->
-      <div class="col-lg-5">
-        <h1 class="font-weight-light">/iamjatinagrawal</h1>
-      </div>
-      <!-- /.col-md-4 -->
-    </div>
+<!--    <div class="row align-items-center my-5">-->
+<!--      <div class="col-lg-7">-->
+<!--        <img class="img-fluid rounded mb-4 mb-lg-0" src="https://drive.google.com/uc?export=view&id=1pBOyPHTAXZUv4JIhOarnSzCqYKc9zLzu" alt="">-->
+<!--      </div>-->
+<!--      &lt;!&ndash; /.col-lg-8 &ndash;&gt;-->
+<!--      <div class="col-lg-5">-->
+<!--        <h1 class="font-weight-light">/iamjatinagrawal</h1>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; /.col-md-4 &ndash;&gt;-->
+<!--    </div>-->
     <!-- /.row -->
+      <header class="bg-dark text-center py-1 mb-4">
+  <div class="container">
+    <h4 class="font-weight-light text-white">Meet the Team</h4>
+  </div>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+  <div class="row">
+    <!-- Team Member 1 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://drive.google.com/uc?export=view&id=1VBY18F8Rlfyh3F4Y0tBXLG1TttXc0DMz" alt="" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">/iamjatinagrawal</h5>
+          <div class="card-text text-black-50">Developer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
 
 
   </div>
   <!-- /.container -->
 
+
+<!--  <section class="newsletter">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="content">-->
+<!--                        <form method="post" action="{% url 'index' %}">-->
+<!--                            {% csrf_token %}-->
+<!--                            <h2>SUBSCRIBE TO OUR NEWSLETTER</h2>-->
+<!--                            <div class="input-group">-->
+<!--                                <input type="email" class="form-control" placeholder="Enter your email">-->
+<!--                                <span class="input-group-btn">-->
+<!--                                    <button class="btn" type="submit">Subscribe Now</button>-->
+<!--                                </span>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
@@ -188,10 +246,6 @@
     </div>
     <!-- /.container -->
   </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

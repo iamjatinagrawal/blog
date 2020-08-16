@@ -6,7 +6,8 @@ from ckeditor.fields import RichTextField
 
 User = get_user_model()
 
-#Base Model
+
+# Base Model
 class BaseModel(models.Model):
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
@@ -19,7 +20,7 @@ class BaseModel(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
 
 
-#Category Model
+# Category Model
 class Category(BaseModel):
     name = models.CharField(max_length=50, null=False, blank=False)
 
@@ -32,12 +33,12 @@ class Category(BaseModel):
         return self.name
 
 
-#Post Model
+# Post Model
 class Post(BaseModel):
     title = models.CharField(max_length=150, null=False, blank=False)
     short_description = models.CharField(max_length=250, null=True, blank=True)
     # index_image = models.ImageField(null=True, blank=True, upload_to='blog/index_image/')
-    index_image = models.URLField(max_length=500,null=True, blank=True)
+    index_image = models.URLField(max_length=500, null=True, blank=True)
     category = models.ManyToManyField(Category, blank=False)
     content = RichTextField(null=True, blank=True)
 
@@ -53,7 +54,6 @@ class Post(BaseModel):
     #     return reverse("post_detail",kwargs={'pk':self.pk})
 
 
-
 class ContactFormModel(BaseModel):
     full_name = models.CharField(max_length=250, null=False, blank=False)
     email = models.EmailField()
@@ -62,16 +62,20 @@ class ContactFormModel(BaseModel):
 
     def __str__(self):
         return self.full_name
-    
+
     class Meta:
         db_table = 'ContactFormModel'
         verbose_name = 'Contact Form'
-        verbose_name_plural = 'Contact Forms' 
+        verbose_name_plural = 'Contact Forms'
 
 
+class SubscriberEmailModel(BaseModel):
+    email_id = models.EmailField()
 
+    class Meta:
+        db_table = 'SubscriberEmailModel'
+        verbose_name = 'Subscriber Email'
+        verbose_name_plural = 'Subscriber Emails'
 
-
-
-
-
+    def __str__(self):
+        return self.email_id

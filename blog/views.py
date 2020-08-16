@@ -17,10 +17,10 @@ class IndexPostListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        django_posts = Post.objects.filter(category__name='Django').order_by('-created_at')[:4]
-        excel_posts = Post.objects.filter(category__name='Microsoft Excel').order_by('-created_at')[:3]
+        django_posts = Post.objects.filter(category__name='Django').order_by('-created_at')[:2]
+        excel_posts = Post.objects.filter(category__name='Python').order_by('-created_at')[:3]
         context["django_posts"] = django_posts
-        context["excel_posts"] = excel_posts
+        context["python_posts"] = excel_posts
         return context
 
 class PostListView(ListView):
@@ -61,6 +61,12 @@ class SearchPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        posts = Post.objects.all().order_by('-created_at')[:3]
+        context["posts"] = posts
+        return context
 
 
 class ContactFormCreateView(CreateView):
