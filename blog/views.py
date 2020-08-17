@@ -75,7 +75,7 @@ class ContactFormCreateView(CreateView):
     form_class = ContactForm
 
     def get_success_url(self):
-        return reverse_lazy('post-list')
+        return reverse_lazy('index')
 
     # def get_context_data(self, **kwargs):
     #     kwargs['message'] = 'Form submitted'
